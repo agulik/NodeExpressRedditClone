@@ -44,7 +44,9 @@ app.set('view engine', 'pug');
 app.use(morgan('dev'));
 
 // This middleware will parse the POST requests coming from an HTML form, and put the result in request.body.
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 // This middleware will parse the Cookie header from all requests, and put the result in request.cookies as an object.
 app.use(cookieParser());
@@ -97,21 +99,25 @@ app.use('/static', express.static(__dirname + '/public'));
 // Regular home Page
 app.get('/', function(request, response) {
     myReddit.getAllPosts()
-    .then(function(posts) {
-        response.render('homepage', {posts: posts});
-    })
-    .catch(function(error) {
-        response.render('error', {error: error});
-    })
+        .then(function(posts) {
+            response.render('homepage', {
+                posts: posts
+            });
+        })
+        .catch(function(error) {
+            response.render('error', {
+                error: error
+            });
+        });
 });
 
 // Listing of subreddits
 app.get('/subreddits', function(request, response) {
-    
+
     //response.send("TO BE IMPLEMENTED");  
     response.render('post-list');
     return myReddit.getAllPosts();
-    
+
 });
 
 // Subreddit homepage, similar to the regular home page but filtered by sub.
@@ -121,21 +127,22 @@ app.get('/r/:subreddit', function(request, response) {
 });
 
 // Sorted home page
-app.get('/sort/:method', function(request, response){
-    myReddit.getAllPosts().then(function(sortPosts){
-    if(request.params.method === myReddit.getAllPosts.hot) {
-        response.render('post-list', {posts: sortPosts})
-    } else if (request.params.method === myReddit.getAllPosts.top) {
-        response.render('post-list',{posts: sortPosts})
-    } else{
-         response.status(404).send('404 Not Found');
-    }
-    response.send('post-list');
+app.get('/sort/:method', function(request, response) {
+    myReddit.getAllPosts(null, request.params.method).then(function(sortPosts) {
+        response.render('post-list', {
+            posts: sortPosts
+        })
     })
 });
 
 app.get('/post/:postId', function(request, response) {
-    response.send("TO BE IMPLEMENTED");
+    return Promise.all([myReddit.getSinglePost(), myReddit.getCommentsForPost()]) // return a promise to retrieve the single post and its comments
+        .then(results => {
+            response.send('single-post') // send the results to the single-post view pug file
+        }).catch(error => {
+            response.status(404).send('404 Not Found') // throw error if the post does not exist 
+        });
+
 });
 
 /*
@@ -153,12 +160,18 @@ app.post('/vote', onlyLoggedIn, function(request, response) {
 
 // This handler will send out an HTML form for creating a new post
 app.get('/createPost', onlyLoggedIn, function(request, response) {
-    response.send("TO BE IMPLEMENTED");
+    myReddit.getAllSubreddits()
+        .then(subreddits => {
+            response.send('create-post-form');
+        });
 });
 
 // POST handler for form submissions creating a new post
 app.post('/createPost', onlyLoggedIn, function(request, response) {
-    response.send("TO BE IMPLEMENTED");
+    myReddit.createPost()
+        .then(subreddits => {
+            response.send(request.result.user);
+        });
 });
 
 // Listen
