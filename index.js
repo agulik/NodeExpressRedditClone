@@ -107,22 +107,31 @@ app.get('/', function(request, response) {
 
 // Listing of subreddits
 app.get('/subreddits', function(request, response) {
-    /*
-    1. Get all subreddits with RedditAPI
-    2. Render some HTML that lists all the subreddits
-     */
     
-    response.send("TO BE IMPLEMENTED");
+    //response.send("TO BE IMPLEMENTED");  
+    response.render('post-list');
+    return myReddit.getAllPosts();
+    
 });
 
 // Subreddit homepage, similar to the regular home page but filtered by sub.
 app.get('/r/:subreddit', function(request, response) {
-    response.send("TO BE IMPLEMENTED");
+    response.status(404).send('404 Not Found');
+    return myReddit.getSubredditByName(request.params.subreddit);
 });
 
 // Sorted home page
-app.get('/sort/:method', function(request, response) {
-    response.send("TO BE IMPLEMENTED");
+app.get('/sort/:method', function(request, response){
+    myReddit.getAllPosts().then(function(sortPosts){
+    if(request.params.method === myReddit.getAllPosts.hot) {
+        response.render('post-list', {posts: sortPosts})
+    } else if (request.params.method === myReddit.getAllPosts.top) {
+        response.render('post-list',{posts: sortPosts})
+    } else{
+         response.status(404).send('404 Not Found');
+    }
+    response.send('post-list');
+    })
 });
 
 app.get('/post/:postId', function(request, response) {
