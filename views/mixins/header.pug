@@ -1,0 +1,42 @@
+mixin headerMixin(loggedInUser)
+ header
+    if loggedInUser
+        h3
+        |&nbsp; &nbsp; Welcome #{loggedInUser.username}
+        
+        ul
+            a(href="/")
+                button(type="button" class="button") Home
+            | 
+            a(href="/logout")
+                button(type="button" class="button") Logout
+            | 
+            a(href="/createPost")
+                button(type="button" class="button") Create new post!
+            br
+            br
+            a(href="/sort/hot") 
+                button(type="button" class="button") Sort Hot
+            |  
+            a(href="/sort/hot")
+                button(type="button" class="button") Sort Top
+    else
+        ul
+            li
+                a(href="/auth/signup") Signup
+            li
+                a(href="/auth/login") Login
+            br
+            a(href="/")
+                button(type="button" class="button") Home
+            br
+            br
+            a(href="/createPost")
+                button(type="button" class="button") Create new post!
+            br
+            br
+            a(href="/sort/hot") 
+                button(type="button" class="button") Sort Hot
+            |&nbsp; &nbsp; &nbsp; 
+            a(href="/sort/hot")
+                button(type="button" class="button") Sort Top

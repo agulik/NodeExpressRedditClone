@@ -45,4 +45,29 @@
         
         v.voteDirection/NOW()-p.createdAt AS condition
         
+        //'GROUP BY p.id ORDER BY voteDirection DESC'
         
+         WHEN ? = 'top' THEN ${topCondition}
+         
+         
+         
+         //Custom transformation function
+                     .then(result => {
+                var data = result.map((post) => {
+                    return {
+                        id: post.postId,
+                        title: post.postTitle,
+                        url: post.postUrl,
+                        user: {
+                            id: post.userId,
+                            username: post.username,
+                        },
+                        subreddit: {
+                            name: post.subredditName,
+                            id: post.subredditId,
+                            description: post.subredditDescription
+                        }
+                    }
+                })
+                return data;
+            });

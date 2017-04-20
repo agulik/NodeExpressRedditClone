@@ -1,11 +1,14 @@
 var express = require('express');
+var loginTokenChecker = require('../lib/check-login-token.js');
 
 module.exports = function(myReddit) {
     var authController = express.Router();
+    
 
     authController.get('/login', function(request, response) {
         response.render('login-form', {});
     });
+
 
     authController.post('/login', function(request, response) {
         myReddit.checkUserLogin(request.body.username, request.body.password) // call the checkUserLogin function and pass it username and pwd
@@ -21,6 +24,10 @@ module.exports = function(myReddit) {
             .catch(error => {
                 response.status(401).send('Unauthorized') // throw error if login check is unsuccessful
             });
+    });
+    
+    authController.get('/logout', function(request, response) {
+        response.render('homepage', {});
     });
 
     authController.get('/signup', function(request, response) {

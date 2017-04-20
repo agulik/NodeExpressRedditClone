@@ -6,15 +6,9 @@ html
         block title
             title Redit Clone
     body
-        header
-            if loggedInUser
-                p Welcome #{loggedInUser.username}
-            else
-                ul
-                    li
-                        a(href="/auth/signup") Signup
-                    li
-                        a(href="/auth/login") Login
+
         main
             block content
+            br
+            br
         footer &copy; 2017 bruh

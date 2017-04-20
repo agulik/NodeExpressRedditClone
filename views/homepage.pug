@@ -1,9 +1,14 @@
 extends layout.pug
 include mixins/post-list
+include mixins/header
+
 
 block title
     title Welcome to Reddit Clone!!!
+    h1 Welcome to Reddit!!!
+    +headerMixin(loggedInUser)
+        
 
 block content
-    h1 Welcome to Reddit!!!
+    
     +postList(posts)

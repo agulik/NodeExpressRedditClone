@@ -1,3 +1,23 @@
 body {
     font-family: Helvetica, arial, sans-serif;
+    color: #fff;
+    background-color: #2ecc71;
 }
+
+.button {
+    background-color: #27ae60;
+    border-color: #27ae60;
+    border-radius: 50px;
+    border: 1px solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 11px;
+    
+}
+
+.button-text {
+    color: #fff;
+}
+
