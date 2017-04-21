@@ -4,9 +4,10 @@ include mixins/header
 
 
 block title
-    title Welcome to Reddit Clone!!!
-    h1 Welcome to Reddit!!!
-    +headerMixin(loggedInUser)
+    div(id="webhead")
+        title Reddit: the front page of the internet
+        h1 Welcome to Reddit!!!
+        +headerMixin(loggedInUser)
         
 
 block content

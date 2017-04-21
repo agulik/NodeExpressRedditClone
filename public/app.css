@@ -1,8 +1,9 @@
-body {
-    font-family: Helvetica, arial, sans-serif;
-    color: #fff;
-    background-color: #2ecc71;
-}
+html, body {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font-family: 'Open Sans', sans-serif;
+ }
 
 .button {
     background-color: #27ae60;
@@ -17,7 +18,82 @@ body {
     
 }
 
+.wrapper {
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	background: #eee;
+	position: absolute;
+}
+
 .button-text {
     color: #fff;
 }
 
+#webhead {
+    background-color: grey;
+    height: 220px;
+    width: 100%;
+    position: fixed;
+    margin-top: -18px;
+}
+
+
+#logBox {
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  top: 25%;
+  left: 25%;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, .6);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.logPg {
+    background:  url(http://i.imgur.com/MlfDS2G.gif) no-repeat center center fixed; 
+    background-color: #cccccc;
+    background-size: cover;
+    position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+#logH1 {
+    margin-top: 13%;
+    text-align: center;
+    left: 50%;
+    font-size: 20px;
+    color: white;
+}
+
+.comment-form {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 0 0 50px 0;
+    width: 300px;
+    line-height: 1em;
+}
+
+.login {
+	background-color:transparent;
+	-moz-border-radius:20px;
+	-webkit-border-radius:20px;
+	border-radius:20px;
+	border:1px solid #8c8f8c;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #000000;
+}
+.login:hover {
+	background-color:#8c8f8c;
+}
+.login:active {
+	position:relative;
+	top:1px;
+}

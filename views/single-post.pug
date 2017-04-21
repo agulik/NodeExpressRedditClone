@@ -12,6 +12,16 @@ block content
                         span  in&nbsp;
                         a(href="/r/" + post.subreddit.name) /r/#{post.subreddit.name}
                     p Score: #{post.voteScore} Upvotes: #{post.numUpvotes} Downvotes: #{post.numDownvotes}
+                    form(method='POST', action='/createComment')
+                        input(type='hidden', name='postId', value=post.id)
+                        p
+                        | Add a comment:
+                        br
+                        textarea(type='text', name='text', class = "comment-form")
+                        br
+                        br
+                        button(class="button") Submit!
                     each comment in comments
-                        p #{comment.text}
-                    
+                     p #{comment.text} 
+                     | submitted by #{comment.user.username} on #{comment.createdAt}
+                                

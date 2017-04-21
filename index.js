@@ -211,7 +211,6 @@ middleware calls next(), then also pass it to the final request handler specifie
 
 
 app.post('/vote', onlyLoggedIn, function(request, response) {
-    console.log(request.loggedInUser.userId)
     var vote = {
         voteDirection: request.body.voteDirection,
         postId: request.body.postId,
@@ -221,26 +220,11 @@ app.post('/vote', onlyLoggedIn, function(request, response) {
         .then(results => {
             response.render('post-list', {
                 voteCount: results
-            });
+            })
+
         })
-        .catch((e) => console.log('error', e))
 });
 
-// app.post('/vote', onlyLoggedIn, (request, response) => {
-//     return Promise.all([myReddit.getUserFromSession(request.cookies.SESSION), request.body])
-//     .then(result => {    
-//         return { postId : Number(result[1].postId),
-//                      userId : result[0].id,
-//                      voteDirection: Number(result[1].vote) };
-//     })
-//     .then(result => {
-//       return  myReddit.createVote(result);
-//     })
-//     .then(result => {
-//         response.redirect(`${request.header('Referer')}`);
-//     })
-//     .catch(e => console.log(e));
-// });
 
 // This handler will send out an HTML form for creating a new post
 app.get('/createPost', onlyLoggedIn, function(request, response) {
@@ -258,10 +242,11 @@ app.post('/createPost', onlyLoggedIn, function(request, response) {
             subredditId: request.body.subredditId,
             url: request.body.url,
             title: request.body.title,
-            userId: request.loggedInUser.userId
+            userId: request.loggedInUser.userId,
+            postId: request.body.postId
         }) // call the createPost function and pass it the information from the form
-        .then(results => {
-            response.redirect('/post/postId');
+        .then(newPostId => {
+            response.redirect(`post/${newPostId}`);
         })
 });
 
@@ -272,6 +257,17 @@ app.get('/logout', function(request, response) {
         .then(results => {
             response.redirect('/');
         });
+});
+
+app.post('/createComment', onlyLoggedIn, function(request, response) {
+    myReddit.createComment({
+            userId: request.loggedInUser.userId,
+            postId: request.body.postId,
+            text: request.body.text
+        }) // call the createPost function and pass it the information from the form
+        .then(results => {
+            response.redirect(`post/${request.body.postId}`);
+        })
 });
 
 
