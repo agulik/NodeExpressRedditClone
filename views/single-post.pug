@@ -29,9 +29,9 @@ block content
                                 br
                                 br
                                 button(class="button" type="text") Submit!
-                                .comments
-                                    each comment in comments
-                                     p !{comment.text} 
-                                     span(style='font-style:italic')
-                                        span(style='font-weight:bold') submitted by #{comment.user.username} on #{comment.createdAt}
+                            .comments
+                                each comment in comments
+                                 p !{comment.text} 
+                                 span(style='font-style:italic')
+                                    span(style='font-weight:bold') submitted by #{comment.user.username} on #{comment.createdAt}
                                     

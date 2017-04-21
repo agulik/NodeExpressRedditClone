@@ -143,19 +143,27 @@ button.login:active {
 .btn-extra {
     text-decoration: none;
     color: #000;
-    margin-right: 1250px;
+    left: 100px;
 }
 
 .extra {
     position: relative;
     text-decoration: none;
     color: #000;
-    margin-right: 1250px;
-    left: 1240px;
+    left: 100px;
 }
+
+.extra2 {
+    position: relative;
+    text-decoration: none;
+    color: #000;
+    left: 100px;
+}
+
 
 .allbtn {
     margin-top: 15px;
+    text-decoration: none;
 }
 
 .elsebtn {
@@ -168,11 +176,13 @@ button.login:active {
     position: relative;
     bottom: 35px;
     left: 10px;
+    text-decoration: none;
 }
 
 .rightbtn {
     position: relative;
     float: right;
+    text-decoration: none;
 }
 
 .loginField {
@@ -183,7 +193,8 @@ button.login:active {
 }
 
 .create-sort {
-    margin-top: 148px;
+    margin-top: 125px;
+    margin-left: 20px;
 }
 
 /*
