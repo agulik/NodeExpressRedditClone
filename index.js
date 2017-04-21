@@ -218,9 +218,7 @@ app.post('/vote', onlyLoggedIn, function(request, response) {
     }
     myReddit.createVote(vote)
         .then(results => {
-            response.render('post-list', {
-                voteCount: results
-            })
+            response.redirect(request.get('referer'));
 
         })
 });
@@ -257,6 +255,16 @@ app.get('/logout', function(request, response) {
         .then(results => {
             response.redirect('/');
         });
+});
+
+// GET handler to go to specific post
+app.get('/individualPost', function(request, response) {
+    myReddit.getAllPosts({ // get all the posts 
+                postId: request.body.postId // retrieve the post ids
+            })
+            .then(results => {
+                response.redirect(`post/${request.body.postId}`);
+            })
 });
 
 app.post('/createComment', onlyLoggedIn, function(request, response) {

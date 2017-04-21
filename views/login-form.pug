@@ -3,13 +3,13 @@ extends layout.pug
 block content
   div.logPg
     div(id="logBox")
-      h1(id="logH1") Login
+      h1(id="logH1") Welcome Back
         form(action='/auth/login', method='POST')
           p
-            | Username: 
-            input(type='text', name='username')
+            | 
+            input.loginField(type='text', name='username')
           p
-            | Password: 
-            input(type='password', name='password')
+            | 
+            input.loginField(type='password', name='password')
           p
             button(class="login" type='submit') Login!

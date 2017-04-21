@@ -2,8 +2,15 @@ extends layout.pug
 include mixins/header
 include mixins/post-list
 
+block title
+    div(id="webhead")
+            +headerMixin(loggedInUser)
+            title Raddit: the front page of the DANKnet
+            .logo
+                img.logoHome(src='/static/images/shaka_w.png')
+            h1 Welcome to Raddit!
+    
 block content
-    +headerMixin(loggedInUser)
     +postList(posts)
     ul.post-list
         each post in posts
